@@ -28,7 +28,8 @@ export default function Genre({ label, count, setCount }: Genre) {
 
   useEffect(() => {
     let genreArr = genre?.split("$");
-    const index = genreArr!.indexOf(label);
+    if (genreArr === undefined) return
+    const index = genreArr?.indexOf(label);
     if (index === -1) return;
     setChecked(true);
     setCount((prev) => prev + 1);
