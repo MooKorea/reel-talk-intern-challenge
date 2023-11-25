@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Genre from "./Genre";
 import Link from "next/link";
-import { useQueryState } from "next-usequerystate";
 import SearchBar from "@/app/_components/SearchBar";
+import useOnboardingSave from "@/app/_hooks/useOnboardingSave";
 
 const genres = [
   "✨ Action",
@@ -21,10 +21,7 @@ const genres = [
 export default function Genres() {
   //Genre selection count, up to 5
   const [count, setCount] = useState(0);
-  const [_progress, setProgress] = useQueryState("progress")
-  useEffect(() => {
-    setProgress("2")
-  }, [])
+  useOnboardingSave(2)
   return (
     <>
       <h1 className="text-[28px] text-white/[0.92] mt-14">

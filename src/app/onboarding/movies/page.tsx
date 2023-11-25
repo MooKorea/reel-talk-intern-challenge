@@ -1,14 +1,12 @@
 "use client";
 import SearchBar from "@/app/_components/SearchBar";
+import useOnboardingSave from "@/app/_hooks/useOnboardingSave";
 import { useQueryState } from "next-usequerystate";
 import Link from "next/link";
 import { useEffect } from "react";
 
 export default function TopMovies() {
-  const [_progress, setProgress] = useQueryState("progress");
-  useEffect(() => {
-    setProgress("3");
-  }, []);
+  useOnboardingSave(3)
   return (
     <>
       <h1 className="text-[28px] text-white/[0.92] mt-14">
