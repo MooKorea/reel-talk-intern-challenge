@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: "var(--primary)",
+        secondary: "var(--secondary)"
       },
       fontFamily: {
         AvenirRegular: ["AvenirRegular", "sans-serif"],

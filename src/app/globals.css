@@ -9,27 +9,27 @@
 
 @font-face {
   font-family: "AvenirLight";
-  src: url("./fonts/Avenir\ Light.ttf");
+  src: url("./_fonts/Avenir\ Light.ttf");
 }
 
 @font-face {
   font-family: "AvenirRegular";
-  src: url("./fonts/Avenir\ Regular.ttf");
+  src: url("./_fonts/Avenir\ Regular.ttf");
 }
 
 @font-face {
   font-family: "AvenirBook";
-  src: url("./fonts/Avenir\ Book.ttf");
+  src: url("./_fonts/Avenir\ Book.ttf");
 }
 
 @font-face {
   font-family: "AvenirHeavy";
-  src: url("./fonts/Avenir\ Heavy.ttf");
+  src: url("./_fonts/Avenir\ Heavy.ttf");
 }
 
 @font-face {
   font-family: "AvenirBlack";
-  src: url("./fonts/Avenir\ Black.ttf");
+  src: url("./_fonts/Avenir\ Black.ttf");
 }
 
 body {

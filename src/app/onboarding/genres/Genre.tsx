@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useQueryState } from "next-usequerystate";
+import { useEffect, useState } from "react";
 
 interface Genre {
   label: string;
@@ -9,17 +10,37 @@ interface Genre {
 
 export default function Genre({ label, count, setCount }: Genre) {
   const [checked, setChecked] = useState(false);
+  const [genre, setGenre] = useQueryState("genre");
 
   const handleChecked = () => {
     setChecked(!checked);
     setCount((prev) => prev + (checked ? -1 : 1));
+
+    let genreArr = genre?.split("$");
+    if (checked) {
+      const index = genreArr!.indexOf(label);
+      genreArr?.splice(index, 1);
+      setGenre(genreArr!.join("$"));
+    } else {
+      setGenre((prev) => prev + `$${label}`);
+    }
   };
+
+  useEffect(() => {
+    let genreArr = genre?.split("$");
+    const index = genreArr!.indexOf(label);
+    if (index === -1) return;
+    setChecked(true);
+    setCount((prev) => prev + 1);
+  }, []);
 
   return (
     <div
       className={
         "cursor-pointer hover:border-primary flex items-center w-[160px] px-2 h-[46px] text-black rounded-lg " +
-        (checked ? "bg-primary border-2 border-primary " : "bg-white border-2 border-[#6d6d6d] ") +
+        (checked
+          ? "bg-primary border-2 border-primary "
+          : "bg-white border-2 border-[#6d6d6d] ") +
         (count >= 5 && !checked
           ? "pointer-events-none opacity-50"
           : "pointer-events-auto")
