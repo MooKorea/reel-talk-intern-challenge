@@ -2,7 +2,7 @@
 import SearchBar from "@/app/_components/SearchBar";
 import useOnboardingSave from "@/app/_hooks/useOnboardingSave";
 import Thumbnail from "./Thumbnail";
-import { movieData } from "./movieData";
+import { tvshowData } from "./tvshowData";
 import { useState } from "react";
 import Footer from "./Footer";
 import ThumbnailGrid from "@/app/_components/ThumbnailGrid";
@@ -20,16 +20,16 @@ export default function TopMovies() {
   return (
     <>
       <h1 className="text-[28px] text-white/[0.92] mt-14">
-        Select your top 5 movies
+        Select your top 5 TV shows
       </h1>
       <p className="w-[600px] mt-2 tracking-wide font-AvenirLight leading-[23px] text-center text-base text-white/[0.8]">
-        Selecting your top 5 movies will enable us to suggest like-minded users
-        and nearby communities for exciting watch parties and movie premiere
-        gatherings
+        Selecting your top 5 TV-shows will enable us to suggest like-minded
+        users and nearby communities for exciting watch parties and movie
+        premiere gatherings
       </p>
       <SearchBar />
-      <ThumbnailGrid title="Movies you might like">
-        {movieData.map((e, i) => {
+      <ThumbnailGrid title="TV-shows you might like"> 
+        {tvshowData.map((e, i) => {
           return (
             <Thumbnail
               data={e}
