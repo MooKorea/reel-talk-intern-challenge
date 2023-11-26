@@ -44,7 +44,8 @@ export default function Thumbnail({
     isMounted.current = true;
   }, [mediaArr]);
 
-  //check boxes on mount
+  //This reads the URL query params when the component is mounted.
+  //If the item exists as a param, it is selected
   useEffect(() => {
     let selections = media?.split(",");
     if (selections === undefined) return;
@@ -58,6 +59,9 @@ export default function Thumbnail({
 
   const handleChecked = () => {
     dispatch(selection.includes(data) ? removeAction : addAction);
+
+    //This is the array of selections to be displayed in the footer.
+    //The selection is removed if it is already in the array
     if (selection.includes(data)) {
       setSelection((prev) => {
         return prev.filter((e) => e !== data);

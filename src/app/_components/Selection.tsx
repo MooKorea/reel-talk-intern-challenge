@@ -12,6 +12,7 @@ interface Selection {
   action: AnyAction;
 }
 
+//These are the empty slots for movies & TV shows in the SelectionFooter component
 export default function Selection({ setSelection, data, action }: Selection) {
   const dispatch = useDispatch();
 

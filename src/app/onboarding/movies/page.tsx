@@ -14,9 +14,13 @@ import Selection from "@/app/_components/Selection";
 export default function TopMovies() {
   //Genre selection count, up to 5
   const [count, setCount] = useState(0);
+
+  //Currently selected movies
   const [selection, setSelection] = useState<mediaData[]>([]);
+
   useOnboardingSave(3);
 
+  //Creates 5 slots in the footer
   let selectionContainers: React.ReactNode[] = [];
   for (let i = 0; i < 5; i++) {
     selectionContainers = [

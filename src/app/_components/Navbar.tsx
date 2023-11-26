@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className="w-[1120px] h-full flex items-center justify-between">
         <div className="flex gap-4 items-center">
           <div className="flex items-center gap-1">
-            <img className="h-[26px]" src="/Reel-Talk-Logo.png" />
+            <Image height={26} width={24} src="/Reel-Talk-Logo.png" alt="Reel Talk Logo"/>
             <div className="font-AvenirBlack text-[17px] whitespace-nowrap">
               REEL TALK
             </div>

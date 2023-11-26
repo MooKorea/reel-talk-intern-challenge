@@ -9,7 +9,6 @@ interface Footer {
 }
 
 export default function Footer({ selection, selectionContainers, nextPage, previousPage }: Footer) {
-
   return (
     <div className="w-screen h-[171px] fixed bottom-0 flex items-center justify-center bg-[#333333]">
       <div className="w-[576px] h-123px flex justify-between items-end">

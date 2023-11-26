@@ -3,6 +3,7 @@ interface ThumbnailGrid {
   title: string;
 }
 
+//Grids of movies & TV shows
 export default function ThumbnailGrid({ children, title }: ThumbnailGrid) {
   return (
     <div className="w-[696px] mt-14">

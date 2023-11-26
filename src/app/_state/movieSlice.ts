@@ -8,6 +8,7 @@ const initialState: MovieState = {
   value: [],
 };
 
+//reducer function for movie selection
 const movieSlice = createSlice({
   name: "movie",
   initialState,

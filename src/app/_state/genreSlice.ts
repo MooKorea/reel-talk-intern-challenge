@@ -8,6 +8,8 @@ const initialState: GenreState = {
   value: [],
 };
 
+//reducer function for genre selection.
+//These are used for handling complex state
 const genreSlice = createSlice({
   name: "genre",
   initialState,

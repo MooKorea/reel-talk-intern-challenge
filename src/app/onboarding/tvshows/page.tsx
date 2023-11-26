@@ -15,9 +15,12 @@ export default function TopTVShows() {
   //Genre selection count, up to 5
   const [count, setCount] = useState(0);
 
+  //Currently selected TV shows
   const [selection, setSelection] = useState<mediaData[]>([]);
-  useOnboardingSave(4);
 
+  useOnboardingSave(4);
+  
+  //Creates 5 slots in the footer
   let selectionContainers: React.ReactNode[] = [];
   for (let i = 0; i < 5; i++) {
     selectionContainers = [

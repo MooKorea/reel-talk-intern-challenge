@@ -14,7 +14,9 @@ interface Genre {
 export default function Genre({ label, count, setCount }: Genre) {
   const [checked, setChecked] = useState(false);
   
+  //useQueryState stores state similar to useState, but in the URL
   const [genre, setGenre] = useQueryState("genre");
+
   const dispatch = useDispatch();
   const genresArr = useSelector((state: RootState) => state.genre.value);
 
@@ -29,7 +31,8 @@ export default function Genre({ label, count, setCount }: Genre) {
     isMounted.current = true;
   }, [genresArr]);
 
-  //check boxes on mount
+  //This reads the URL query params when the component is mounted.
+  //If the item exists as a param, it is selected
   useEffect(() => {
     let selections = genre?.split(",");
     if (selections === undefined) return;

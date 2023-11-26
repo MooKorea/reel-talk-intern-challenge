@@ -23,6 +23,10 @@ export default function useOnboardingSave(progress: number) {
 
   useEffect(() => {
     setProgress(progress.toString());
+
+    //The following checks ensure the state is not overwritten with an empty value
+    //Whenever the route changes, the hook will immediately store the URL query params in redux's global state
+    //The second if statement pushes the state back to the URL
     if (genre !== null) {
       dispatch(replaceGenre(genre));
     }
@@ -43,7 +47,5 @@ export default function useOnboardingSave(progress: number) {
     if (tvshowArr.length !== 0) {
       setTVshow(tvshowArr.join());
     }
-
-
   }, []);
 }

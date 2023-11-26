@@ -8,6 +8,7 @@ const initialState: TVshowState = {
   value: [],
 };
 
+//reducer function for TV show selection
 const tvshowSlice = createSlice({
   name: "tvshow",
   initialState,
