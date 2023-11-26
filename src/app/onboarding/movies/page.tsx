@@ -5,16 +5,31 @@ import Thumbnail from "@/app/_components/Thumbnail";
 import { movieData } from "./movieData";
 import { mediaData } from "../layout";
 import { useState } from "react";
-import Footer from "./Footer";
+import SelectionFooter from "@/app/_components/SelectionFooter";
 import ThumbnailGrid from "@/app/_components/ThumbnailGrid";
 import { addMovie, removeMovie } from "@/app/_state/movieSlice";
 import { RootState } from "@/app/_state/store";
+import Selection from "@/app/_components/Selection";
 
 export default function TopMovies() {
   //Genre selection count, up to 5
   const [count, setCount] = useState(0);
   const [selection, setSelection] = useState<mediaData[]>([]);
   useOnboardingSave(3);
+
+  let selectionContainers: React.ReactNode[] = [];
+  for (let i = 0; i < 5; i++) {
+    selectionContainers = [
+      ...selectionContainers,
+      <Selection
+        key={i}
+        setSelection={setSelection}
+        data={selection[i]}
+        action={removeMovie(selection[i]?.label)}
+      />,
+    ];
+  }
+
   return (
     <>
       <h1 className="text-[28px] text-white/[0.92] mt-14">
@@ -44,7 +59,12 @@ export default function TopMovies() {
           );
         })}
       </ThumbnailGrid>
-      <Footer selection={selection} setSelection={setSelection} />
+      <SelectionFooter
+        selection={selection}
+        selectionContainers={selectionContainers}
+        nextPage="/onboarding/tvshows"
+        previousPage="/onboarding/genres"
+      />
     </>
   );
 }

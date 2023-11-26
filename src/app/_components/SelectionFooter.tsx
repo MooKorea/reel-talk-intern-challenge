@@ -1,38 +1,27 @@
 import Link from "next/link";
-import { mediaData } from "../layout";
-import Selection from "@/app/_components/Selection";
-import { removeMovie } from "@/app/_state/movieSlice";
+import { mediaData } from "../onboarding/layout";
 
 interface Footer {
   selection: mediaData[];
-  setSelection: React.Dispatch<React.SetStateAction<mediaData[]>>;
+  selectionContainers: React.ReactNode[]
+  nextPage: string;
+  previousPage: string;
 }
 
-export default function Footer({ selection, setSelection }: Footer) {
-  let container: React.ReactNode[] = [];
-  for (let i = 0; i < 5; i++) {
-    container = [
-      ...container,
-      <Selection
-        key={i}
-        setSelection={setSelection}
-        data={selection[i]}
-        action={removeMovie(selection[i]?.label)}
-      />,
-    ];
-  }
+export default function Footer({ selection, selectionContainers, nextPage, previousPage }: Footer) {
+
   return (
     <div className="w-screen h-[171px] fixed bottom-0 flex items-center justify-center bg-[#333333]">
       <div className="w-[576px] h-123px flex justify-between items-end">
         <div className="w-[272px] text-xl flex flex-col gap-6">
           <div>Your top 5 selections</div>
           <div className="flex w-full gap-2">
-            {container.map((e) => {
+            {selectionContainers.map((e) => {
               return e;
             })}
           </div>
         </div>
-        <NavButtons selection={selection} />
+        <NavButtons selection={selection} nextPage={nextPage} previousPage={previousPage} />
       </div>
     </div>
   );
@@ -40,16 +29,18 @@ export default function Footer({ selection, setSelection }: Footer) {
 
 interface NavButtons {
   selection: mediaData[];
+  nextPage: string;
+  previousPage: string;
 }
 
-function NavButtons({ selection }: NavButtons) {
+function NavButtons({ selection, nextPage, previousPage }: NavButtons) {
   const buttonStyle =
     "cursor-pointer w-[256px] h-12 flex justify-center items-center rounded-lg text-base";
   return (
     <div className="flex flex-col gap-4">
       <Link
         href={
-          selection.length > 0 ? "/onboarding/tvshows" : "/onboarding/genres"
+          selection.length > 0 ? nextPage : previousPage
         }
         className={
           buttonStyle +
@@ -62,7 +53,7 @@ function NavButtons({ selection }: NavButtons) {
       </Link>
       <Link
         href={
-          selection.length > 0 ? "/onboarding/genres" : "/onboarding/tvshows"
+          selection.length > 0 ? previousPage : nextPage
         }
         className={buttonStyle + " border-2"}
       >

@@ -4,18 +4,32 @@ import useOnboardingSave from "@/app/_hooks/useOnboardingSave";
 import Thumbnail from "@/app/_components/Thumbnail";
 import { tvshowData } from "./tvshowData";
 import { useState } from "react";
-import Footer from "./Footer";
+import SelectionFooter from "@/app/_components/SelectionFooter";
 import ThumbnailGrid from "@/app/_components/ThumbnailGrid";
 import { mediaData } from "../layout";
 import { RootState } from "@/app/_state/store";
 import { addTVshow, removeTVshow } from "@/app/_state/tvshowSlice";
+import Selection from "@/app/_components/Selection";
 
-export default function TopMovies() {
+export default function TopTVShows() {
   //Genre selection count, up to 5
   const [count, setCount] = useState(0);
 
   const [selection, setSelection] = useState<mediaData[]>([]);
   useOnboardingSave(4);
+
+  let selectionContainers: React.ReactNode[] = [];
+  for (let i = 0; i < 5; i++) {
+    selectionContainers = [
+      ...selectionContainers,
+      <Selection
+        key={i}
+        setSelection={setSelection}
+        data={selection[i]}
+        action={removeTVshow(selection[i]?.label)}
+      />,
+    ];
+  }
 
   return (
     <>
@@ -28,7 +42,7 @@ export default function TopMovies() {
         premiere gatherings
       </p>
       <SearchBar />
-      <ThumbnailGrid title="TV-shows you might like"> 
+      <ThumbnailGrid title="TV-shows you might like">
         {tvshowData.map((e, i) => {
           return (
             <Thumbnail
@@ -46,7 +60,12 @@ export default function TopMovies() {
           );
         })}
       </ThumbnailGrid>
-      <Footer selection={selection} setSelection={setSelection} />
+      <SelectionFooter
+        selection={selection}
+        selectionContainers={selectionContainers}
+        nextPage="/onboarding/blah"
+        previousPage="/onboarding/movies"
+      />
     </>
   );
 }

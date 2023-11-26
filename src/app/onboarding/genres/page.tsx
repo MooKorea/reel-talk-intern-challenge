@@ -4,24 +4,12 @@ import Genre from "./Genre";
 import Link from "next/link";
 import SearchBar from "@/app/_components/SearchBar";
 import useOnboardingSave from "@/app/_hooks/useOnboardingSave";
-
-const genres = [
-  "✨ Action",
-  "🎢 Adventure",
-  "🔞 Adult",
-  "🖍 Animation",
-  "📖 Biography",
-  "🛕 Bollywood",
-  "😂 Comedy",
-  "🕵️‍♀️ Crime",
-  "🌪 Disaster",
-  "🎥 Documentary",
-];
+import { genreData } from "./genreData";
 
 export default function Genres() {
   //Genre selection count, up to 5
   const [count, setCount] = useState(0);
-  useOnboardingSave(2)
+  useOnboardingSave(2);
   return (
     <>
       <h1 className="text-[28px] text-white/[0.92] mt-14">
@@ -29,7 +17,7 @@ export default function Genres() {
       </h1>
       <SearchBar />
       <div className="mt-14 grid gap-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2">
-        {genres.map((e, i) => {
+        {genreData.map((e, i) => {
           return <Genre label={e} key={i} count={count} setCount={setCount} />;
         })}
       </div>
@@ -53,12 +41,12 @@ export default function Genres() {
           ></path>
         </svg>
       </div>
-      <div className="flex mt-12 text-base gap-6">
+      <div className="flex my-12 text-base gap-6">
         <div className="cursor-pointer h-12 border-white border-2 w-64 rounded-md flex items-center justify-center font-AvenirHeavy text-white/[0.92]">
           Back
         </div>
         <Link
-        href={"/onboarding/movies"}
+          href={"/onboarding/movies"}
           className={
             "cursor-pointer font-AvenirHeavy h-12 w-64 rounded-md flex items-center justify-center " +
             (count > 0
