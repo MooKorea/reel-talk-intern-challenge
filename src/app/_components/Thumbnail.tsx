@@ -4,6 +4,7 @@ import { RootState } from "@/app/_state/store";
 import { useQueryState } from "next-usequerystate";
 import { mediaData } from "../onboarding/layout";
 import { AnyAction } from "@reduxjs/toolkit";
+import Image from "next/image";
 
 interface Thumbnail {
   data: mediaData;
@@ -84,7 +85,7 @@ export default function Thumbnail({
           (selection.includes(data) ? "outline outline-primary outline-[1.8px]" : "")
         }
       >
-        <img className="h-[144px]" src={data.src} alt={data.label} />
+        <Image width={96} height={144} src={data.src} alt={data.label} />
       </div>
       <div className="font-AvenirLight text-xs text-center">{data.label}</div>
       {selection.includes(data) && <Checkmark />}

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Navbar() {
   return (
     <nav className="text-secondary flex gap-3 justify-center h-14 bg-white text-black">
@@ -36,7 +38,7 @@ export default function Navbar() {
         <div className="flex gap-4 items-center">
           <div>Watchlist</div>
           <div className="flex items-center gap-[6px]">
-            <img className="h-10" src="/Profile.png" />
+            <Image width={40} height={40} src="/Profile.png" alt="profile picture" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"

@@ -1,5 +1,6 @@
 import { mediaData } from "../onboarding/layout";
 import { AnyAction } from "@reduxjs/toolkit";
+import Image from "next/image";
 import { useDispatch } from "react-redux";
 
 interface Selection {
@@ -26,7 +27,7 @@ export default function Selection({ setSelection, data, action }: Selection) {
     >
       {data !== undefined && (
         <>
-          <img src={data.src} alt={data.label} className="object-cover" />
+          <Image src={data.src} alt={data.label} width={48} height={72} />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
