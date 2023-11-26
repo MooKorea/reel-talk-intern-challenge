@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { replaceGenre } from "../_state/genreSlice";
 import { replaceMovie } from "../_state/movieSlice";
+import { replaceTVshow } from "../_state/tvshowSlice";
 import { RootState } from "../_state/store";
 
 export default function useOnboardingSave(progress: number) {
@@ -14,6 +15,9 @@ export default function useOnboardingSave(progress: number) {
 
   const [movie, setMovie] = useQueryState("movie")
   const moviesArr = useSelector((state: RootState) => state.movie.value)
+
+  const [tvshow, setTVshow] = useQueryState("tvshow")
+  const tvshowArr = useSelector((state: RootState) => state.tvshow.value)
 
   const dispatch = useDispatch();
 
@@ -31,6 +35,13 @@ export default function useOnboardingSave(progress: number) {
     }
     if (moviesArr.length !== 0) {
       setMovie(moviesArr.join());
+    }
+
+    if (tvshow !== null) {
+      dispatch(replaceTVshow(tvshow));
+    }
+    if (tvshowArr.length !== 0) {
+      setTVshow(tvshowArr.join());
     }
 
 

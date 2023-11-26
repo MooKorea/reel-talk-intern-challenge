@@ -1,16 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addMovie, removeMovie } from "@/app/_state/movieSlice";
 import { RootState } from "@/app/_state/store";
 import { useQueryState } from "next-usequerystate";
-import { movieData } from "./page";
+import { mediaData } from "../onboarding/layout";
+import { AnyAction } from "@reduxjs/toolkit";
 
 interface Thumbnail {
-  data: movieData;
+  data: mediaData;
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
-  selection: movieData[];
-  setSelection: React.Dispatch<React.SetStateAction<movieData[]>>;
+  selection: mediaData[];
+  setSelection: React.Dispatch<React.SetStateAction<mediaData[]>>;
+  urlSearchParam: string;
+  removeAction: AnyAction;
+  addAction: AnyAction;
+  rootState: (state: RootState) => string[]
 }
 
 export default function Thumbnail({
@@ -19,25 +23,29 @@ export default function Thumbnail({
   setCount,
   selection,
   setSelection,
+  urlSearchParam,
+  removeAction,
+  addAction,
+  rootState
 }: Thumbnail) {
-  const [movie, setMovie] = useQueryState("movie");
+  const [media, setMedia] = useQueryState(urlSearchParam);
   const dispatch = useDispatch();
-  const moviesArr = useSelector((state: RootState) => state.movie.value);
+  const mediaArr = useSelector(rootState);
 
   //ref ensures useEffect does not run on initial mount
   const isMounted = useRef(false);
   useEffect(() => {
     if (isMounted.current) {
-      setMovie(moviesArr.join());
-      setCount(moviesArr.filter((e) => e !== "").length);
+      setMedia(mediaArr.join());
+      setCount(mediaArr.filter((e) => e !== "").length);
       return;
     }
     isMounted.current = true;
-  }, [moviesArr]);
+  }, [mediaArr]);
 
   //check boxes on mount
   useEffect(() => {
-    let selections = movie?.split(",");
+    let selections = media?.split(",");
     if (selections === undefined) return;
     const index = selections?.indexOf(data.label);
     if (index === -1) return;
@@ -48,7 +56,7 @@ export default function Thumbnail({
   }, []);
 
   const handleChecked = () => {
-    dispatch(selection.includes(data) ? removeMovie(data.label) : addMovie(data.label));
+    dispatch(selection.includes(data) ? removeAction : addAction);
     if (selection.includes(data)) {
       setSelection((prev) => {
         return prev.filter((e) => e !== data);

@@ -1,23 +1,24 @@
-import { movieData } from "./page";
-import { removeMovie } from "@/app/_state/movieSlice";
+import { mediaData } from "../onboarding/layout";
+import { AnyAction } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
 interface Selection {
-  setSelection: React.Dispatch<React.SetStateAction<movieData[]>>;
+  setSelection: React.Dispatch<React.SetStateAction<mediaData[]>>;
   data: {
     src: string;
     label: string;
   };
+  action: AnyAction;
 }
 
-export default function Selection({ setSelection, data }: Selection) {
+export default function Selection({ setSelection, data, action }: Selection) {
   const dispatch = useDispatch();
 
   return (
     <div
       className="cursor-pointer relative w-12 h-[72px] border-2 border-white/[0.4] border-dashed"
       onClick={() => {
-        dispatch(removeMovie(data.label));
+        dispatch(action);
         setSelection((prev) => {
           return prev.filter((e) => e !== data);
         });

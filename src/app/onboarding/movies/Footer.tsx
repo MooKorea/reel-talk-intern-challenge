@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { movieData } from "./page";
-import Selection from "./Selection";
+import { mediaData } from "../layout";
+import Selection from "@/app/_components/Selection";
+import { removeMovie } from "@/app/_state/movieSlice";
 
 interface Footer {
-  selection: movieData[];
-  setSelection: React.Dispatch<React.SetStateAction<movieData[]>>;
+  selection: mediaData[];
+  setSelection: React.Dispatch<React.SetStateAction<mediaData[]>>;
 }
 
 export default function Footer({ selection, setSelection }: Footer) {
@@ -12,7 +13,12 @@ export default function Footer({ selection, setSelection }: Footer) {
   for (let i = 0; i < 5; i++) {
     container = [
       ...container,
-      <Selection key={i} setSelection={setSelection} data={selection[i]} />,
+      <Selection
+        key={i}
+        setSelection={setSelection}
+        data={selection[i]}
+        action={removeMovie(selection[i]?.label)}
+      />,
     ];
   }
   return (
@@ -33,21 +39,31 @@ export default function Footer({ selection, setSelection }: Footer) {
 }
 
 interface NavButtons {
-  selection: movieData[];
+  selection: mediaData[];
 }
 
-function NavButtons({selection} : NavButtons) {
-  const buttonStyle = "cursor-pointer w-[256px] h-12 flex justify-center items-center rounded-lg text-base"
+function NavButtons({ selection }: NavButtons) {
+  const buttonStyle =
+    "cursor-pointer w-[256px] h-12 flex justify-center items-center rounded-lg text-base";
   return (
     <div className="flex flex-col gap-4">
       <Link
-        href={selection.length > 0 ? "/onboarding/tvshows" : "/onboarding/genres"}
-        className={buttonStyle + (selection.length > 0 ? " bg-primary text-black font-AvenirHeavy" : " border-2" )}
+        href={
+          selection.length > 0 ? "/onboarding/tvshows" : "/onboarding/genres"
+        }
+        className={
+          buttonStyle +
+          (selection.length > 0
+            ? " bg-primary text-black font-AvenirHeavy"
+            : " border-2")
+        }
       >
         {selection.length > 0 ? "Next" : "Back"}
       </Link>
       <Link
-        href={selection.length > 0 ? "/onboarding/genres" : "/onboarding/tvshows"}
+        href={
+          selection.length > 0 ? "/onboarding/genres" : "/onboarding/tvshows"
+        }
         className={buttonStyle + " border-2"}
       >
         {selection.length > 0 ? "Back" : "Skip"}

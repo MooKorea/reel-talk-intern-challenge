@@ -1,21 +1,19 @@
 "use client";
 import SearchBar from "@/app/_components/SearchBar";
 import useOnboardingSave from "@/app/_hooks/useOnboardingSave";
-import Thumbnail from "./Thumbnail";
+import Thumbnail from "@/app/_components/Thumbnail";
 import { movieData } from "./movieData";
+import { mediaData } from "../layout";
 import { useState } from "react";
 import Footer from "./Footer";
 import ThumbnailGrid from "@/app/_components/ThumbnailGrid";
-
-export type movieData = {
-  src: string;
-  label: string;
-};
+import { addMovie, removeMovie } from "@/app/_state/movieSlice";
+import { RootState } from "@/app/_state/store";
 
 export default function TopMovies() {
   //Genre selection count, up to 5
   const [count, setCount] = useState(0);
-  const [selection, setSelection] = useState<movieData[]>([]);
+  const [selection, setSelection] = useState<mediaData[]>([]);
   useOnboardingSave(3);
   return (
     <>
@@ -38,6 +36,10 @@ export default function TopMovies() {
               selection={selection}
               setSelection={setSelection}
               key={i}
+              urlSearchParam="movie"
+              removeAction={removeMovie(e.label)}
+              addAction={addMovie(e.label)}
+              rootState={(state: RootState) => state.movie.value}
             />
           );
         })}
