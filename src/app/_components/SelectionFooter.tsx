@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { mediaData } from "../onboarding/layout";
+import { mediaType } from "../onboarding/layout";
 
 interface Footer {
-  selection: mediaData[];
+  selection: mediaType[];
   selectionContainers: React.ReactNode[]
   nextPage: string;
   previousPage: string;
@@ -27,7 +27,7 @@ export default function Footer({ selection, selectionContainers, nextPage, previ
 }
 
 interface NavButtons {
-  selection: mediaData[];
+  selection: mediaType[];
   nextPage: string;
   previousPage: string;
 }
