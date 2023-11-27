@@ -1,10 +1,7 @@
 import { useQueryState } from "next-usequerystate";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { replaceGenre } from "../_state/genreSlice";
-import { replaceMovie } from "../_state/movieSlice";
-import { replaceTVshow } from "../_state/tvshowSlice";
-import { RootState } from "../_state/store";
+import { RootState, genreState, tvshowState, movieState } from "../_state/store";
 
 export default function useOnboardingSave(progress: number) {
   //progress bar state
@@ -13,11 +10,11 @@ export default function useOnboardingSave(progress: number) {
   const [genre, setGenre] = useQueryState("genre");
   const genresArr = useSelector((state: RootState) => state.genre.value);
 
-  const [movie, setMovie] = useQueryState("movie")
-  const moviesArr = useSelector((state: RootState) => state.movie.value)
+  const [movie, setMovie] = useQueryState("movie");
+  const moviesArr = useSelector((state: RootState) => state.movie.value);
 
-  const [tvshow, setTVshow] = useQueryState("tvshow")
-  const tvshowArr = useSelector((state: RootState) => state.tvshow.value)
+  const [tvshow, setTVshow] = useQueryState("tvshow");
+  const tvshowArr = useSelector((state: RootState) => state.tvshow.value);
 
   const dispatch = useDispatch();
 
@@ -28,21 +25,21 @@ export default function useOnboardingSave(progress: number) {
     //Whenever the route changes, the hook will immediately store the URL query params in redux's global state
     //The second if statement pushes the state back to the URL
     if (genre !== null) {
-      dispatch(replaceGenre(genre));
+      dispatch(genreState.replace(genre));
     }
     if (genresArr.length !== 0) {
       setGenre(genresArr.join());
     }
 
     if (movie !== null) {
-      dispatch(replaceMovie(movie));
+      dispatch(movieState.replace(movie));
     }
     if (moviesArr.length !== 0) {
       setMovie(moviesArr.join());
     }
 
     if (tvshow !== null) {
-      dispatch(replaceTVshow(tvshow));
+      dispatch(tvshowState.replace(tvshow));
     }
     if (tvshowArr.length !== 0) {
       setTVshow(tvshowArr.join());

@@ -22,9 +22,7 @@ export default function Genres() {
         })}
       </div>
       <div className="cursor-pointer mt-6 flex items-center gap-2">
-        <div className="text-white/[0.6] font-AvenirHeavy text-base">
-          show more
-        </div>
+        <div className="text-white/[0.6] font-AvenirHeavy text-base">show more</div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="13"
@@ -49,9 +47,7 @@ export default function Genres() {
           href={"/onboarding/movies"}
           className={
             "cursor-pointer font-AvenirHeavy h-12 w-64 rounded-md flex items-center justify-center " +
-            (count > 0
-              ? "bg-primary text-black"
-              : "bg-[#6d6d6d] text-white/[0.38]")
+            (count > 0 ? "bg-primary text-black" : "bg-[#6d6d6d] text-white/[0.38]")
           }
         >
           Next

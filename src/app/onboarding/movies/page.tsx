@@ -3,12 +3,11 @@ import SearchBar from "@/app/_components/SearchBar";
 import useOnboardingSave from "@/app/_hooks/useOnboardingSave";
 import Thumbnail from "@/app/_components/Thumbnail";
 import { movieData } from "./movieData";
-import { mediaData } from "../layout";
+import { mediaType } from "../layout";
 import { useState } from "react";
 import SelectionFooter from "@/app/_components/SelectionFooter";
 import ThumbnailGrid from "@/app/_components/ThumbnailGrid";
-import { addMovie, removeMovie } from "@/app/_state/movieSlice";
-import { RootState } from "@/app/_state/store";
+import { RootState, movieState } from "@/app/_state/store";
 import Selection from "@/app/_components/Selection";
 
 export default function TopMovies() {
@@ -16,7 +15,7 @@ export default function TopMovies() {
   const [count, setCount] = useState(0);
 
   //Currently selected movies
-  const [selection, setSelection] = useState<mediaData[]>([]);
+  const [selection, setSelection] = useState<mediaType[]>([]);
 
   useOnboardingSave(3);
 
@@ -29,20 +28,17 @@ export default function TopMovies() {
         key={i}
         setSelection={setSelection}
         data={selection[i]}
-        action={removeMovie(selection[i]?.label)}
+        action={movieState.remove(selection[i]?.label)}
       />,
     ];
   }
 
   return (
     <>
-      <h1 className="text-[28px] text-white/[0.92] mt-14">
-        Select your top 5 movies
-      </h1>
+      <h1 className="text-[28px] text-white/[0.92] mt-14">Select your top 5 movies</h1>
       <p className="w-[600px] mt-2 tracking-wide font-AvenirLight leading-[23px] text-center text-base text-white/[0.8]">
-        Selecting your top 5 movies will enable us to suggest like-minded users
-        and nearby communities for exciting watch parties and movie premiere
-        gatherings
+        Selecting your top 5 movies will enable us to suggest like-minded users and nearby
+        communities for exciting watch parties and movie premiere gatherings
       </p>
       <SearchBar />
       <ThumbnailGrid title="Movies you might like">
@@ -56,8 +52,8 @@ export default function TopMovies() {
               setSelection={setSelection}
               key={i}
               urlSearchParam="movie"
-              removeAction={removeMovie(e.label)}
-              addAction={addMovie(e.label)}
+              removeAction={movieState.remove(e.label)}
+              addAction={movieState.add(e.label)}
               rootState={(state: RootState) => state.movie.value}
             />
           );

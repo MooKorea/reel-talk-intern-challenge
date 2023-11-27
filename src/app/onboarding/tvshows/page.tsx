@@ -6,9 +6,9 @@ import { tvshowData } from "./tvshowData";
 import { useState } from "react";
 import SelectionFooter from "@/app/_components/SelectionFooter";
 import ThumbnailGrid from "@/app/_components/ThumbnailGrid";
-import { mediaData } from "../layout";
+import { mediaType } from "../layout";
 import { RootState } from "@/app/_state/store";
-import { addTVshow, removeTVshow } from "@/app/_state/tvshowSlice";
+import { tvshowState } from "@/app/_state/store";
 import Selection from "@/app/_components/Selection";
 
 export default function TopTVShows() {
@@ -16,7 +16,7 @@ export default function TopTVShows() {
   const [count, setCount] = useState(0);
 
   //Currently selected TV shows
-  const [selection, setSelection] = useState<mediaData[]>([]);
+  const [selection, setSelection] = useState<mediaType[]>([]);
 
   useOnboardingSave(4);
   
@@ -29,7 +29,7 @@ export default function TopTVShows() {
         key={i}
         setSelection={setSelection}
         data={selection[i]}
-        action={removeTVshow(selection[i]?.label)}
+        action={tvshowState.remove(selection[i]?.label)}
       />,
     ];
   }
@@ -56,8 +56,8 @@ export default function TopTVShows() {
               setSelection={setSelection}
               key={i}
               urlSearchParam="tvshow"
-              removeAction={removeTVshow(e.label)}
-              addAction={addTVshow(e.label)}
+              removeAction={tvshowState.remove(e.label)}
+              addAction={tvshowState.add(e.label)}
               rootState={(state: RootState) => state.tvshow.value}
             />
           );

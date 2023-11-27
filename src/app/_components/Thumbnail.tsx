@@ -2,16 +2,16 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/_state/store";
 import { useQueryState } from "next-usequerystate";
-import { mediaData } from "../onboarding/layout";
+import { mediaType } from "../onboarding/layout";
 import { AnyAction } from "@reduxjs/toolkit";
 import Image from "next/image";
 
 interface Thumbnail {
-  data: mediaData;
+  data: mediaType;
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
-  selection: mediaData[];
-  setSelection: React.Dispatch<React.SetStateAction<mediaData[]>>;
+  selection: mediaType[];
+  setSelection: React.Dispatch<React.SetStateAction<mediaType[]>>;
   urlSearchParam: string;
   removeAction: AnyAction;
   addAction: AnyAction;

@@ -2,7 +2,7 @@
 import { useQueryState } from "next-usequerystate";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addGenre, removeGenre } from "../../_state/genreSlice";
+import { genreState } from "@/app/_state/store";
 import { RootState } from "@/app/_state/store";
 
 interface Genre {
@@ -25,7 +25,7 @@ export default function Genre({ label, count, setCount }: Genre) {
   useEffect(() => {
     if (isMounted.current) {
       setGenre(genresArr.join());
-      setCount(genresArr.length);
+      setCount(genresArr.filter((e) => e !== "").length);
       return;
     }
     isMounted.current = true;
@@ -55,7 +55,7 @@ export default function Genre({ label, count, setCount }: Genre) {
       }
       onClick={() => {
         setChecked(!checked);
-        dispatch(checked ? removeGenre(label) : addGenre(label));
+        dispatch(checked ? genreState.remove(label) : genreState.add(label));
       }}
     >
       <div className="font-AvenirHeavy grow">{label}</div>

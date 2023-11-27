@@ -3,7 +3,7 @@ import ProgressBar from "../_components/ProgressBar";
 import { Provider } from "react-redux";
 import { store } from "../_state/store";
 
-export type mediaData = {
+export type mediaType = {
   src: string;
   label: string;
 };

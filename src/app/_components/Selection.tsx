@@ -1,10 +1,10 @@
-import { mediaData } from "../onboarding/layout";
+import { mediaType } from "../onboarding/layout";
 import { AnyAction } from "@reduxjs/toolkit";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 
 interface Selection {
-  setSelection: React.Dispatch<React.SetStateAction<mediaData[]>>;
+  setSelection: React.Dispatch<React.SetStateAction<mediaType[]>>;
   data: {
     src: string;
     label: string;

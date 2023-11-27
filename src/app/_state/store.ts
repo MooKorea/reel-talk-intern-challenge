@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import genreReducer from "./genreSlice"
-import movieReducer from "./movieSlice"
-import tvshowReducer from "./tvshowSlice"
+import { OnboardingSlice } from "./onboardingSlice";
+
+export const genreState = new OnboardingSlice("genre")
+export const movieState = new OnboardingSlice("movie")
+export const tvshowState = new OnboardingSlice("tvshow")
 
 export const store = configureStore({
   reducer: {
-    genre: genreReducer,
-    movie: movieReducer,
-    tvshow: tvshowReducer,
+    genre: genreState.reducer,
+    movie: movieState.reducer,
+    tvshow: tvshowState.reducer,
   },
 });
 
